@@ -41,4 +41,11 @@ public class Cmd {
         return new LocalCall<>("cmd.has_exec", Optional.empty(), Optional.of(args),
                 new TypeToken<Boolean>(){});
     }
+
+    public static LocalCall<CmdExecCodeAll> script(String cmd) {
+        LinkedHashMap args = new LinkedHashMap();
+        args.put("cmd", cmd);
+        return new LocalCall("cmd.script", Optional.empty(), Optional.of(args), new TypeToken() {
+        });
+    }
 }

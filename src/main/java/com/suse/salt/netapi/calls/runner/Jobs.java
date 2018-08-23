@@ -69,6 +69,10 @@ public class Jobs {
         @SerializedName("Result")
         private Map<String, JsonElement> result;
 
+        public Map<String,JsonElement> getResult(){
+            return result;
+        }
+
         public String getFunction() {
             return function;
         }
