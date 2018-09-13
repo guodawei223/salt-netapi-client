@@ -5,9 +5,7 @@ import com.suse.salt.netapi.results.CmdExecCodeAll;
 
 import com.google.gson.reflect.TypeToken;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * salt.modules.cmdmod
@@ -42,10 +40,11 @@ public class Cmd {
                 new TypeToken<Boolean>(){});
     }
 
-    public static LocalCall<CmdExecCodeAll> script(String cmd) {
-        LinkedHashMap args = new LinkedHashMap();
-        args.put("cmd", cmd);
-        return new LocalCall("cmd.script", Optional.empty(), Optional.of(args), new TypeToken() {
+    public static LocalCall<CmdExecCodeAll> script(String cmd, List<String> args) {
+        LinkedHashMap<String, Object> kwargs = new LinkedHashMap<>();
+        if(args==null) args = new ArrayList<>();
+        args.add(cmd);
+        return new LocalCall("cmd.script", Optional.ofNullable(args), Optional.of(kwargs), new TypeToken<CmdExecCodeAll>() {
         });
     }
 }

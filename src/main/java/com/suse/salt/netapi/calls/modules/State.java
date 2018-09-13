@@ -7,11 +7,7 @@ import com.suse.salt.netapi.results.StateApplyResult;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * salt.modules.state
@@ -57,6 +53,18 @@ public class State {
 
     public static LocalCall<Object> showHighstate() {
         return new LocalCall<>("state.show_highstate", Optional.empty(), Optional.empty(),
+                new TypeToken<Object>(){});
+    }
+    public static LocalCall<Object> sls(List<String> argParam,Map<String,Object> kwParams) {
+        Map<String, Object> kwargs =new HashMap<>();
+        kwParams.forEach((k,v)->kwargs.put(k,v));
+
+        List<String> arg = new ArrayList<>();
+        for(String argStr : argParam){
+            arg.add(argStr);
+        }
+
+        return new LocalCall<>("state.sls", Optional.ofNullable(argParam), Optional.ofNullable(kwParams),
                 new TypeToken<Object>(){});
     }
 
