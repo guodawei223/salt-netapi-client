@@ -40,10 +40,11 @@ public class Cmd {
                 new TypeToken<Boolean>(){});
     }
 
-    public static LocalCall<CmdExecCodeAll> script(String cmd, List<String> args) {
-        LinkedHashMap<String, Object> kwargs = new LinkedHashMap<>();
+    public static LocalCall<CmdExecCodeAll> script(String cmd, List<Object> args,Map<String, Object> kwargs) {
+        if(kwargs==null) kwargs = new LinkedHashMap<>();
+
         if(args==null) args = new ArrayList<>();
-        args.add(cmd);
+        args.add(0,cmd);
         return new LocalCall("cmd.script", Optional.ofNullable(args), Optional.of(kwargs), new TypeToken<CmdExecCodeAll>() {
         });
     }
